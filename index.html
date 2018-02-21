@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link rel="stylesheet" href="./assets/javascript/game.js"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <title>Gem Collector</title>
+</head>
+
+<body>
+    <div id=wrapper>
+
+        <h1>Gem Collector Game
+            <h1>
+                <h1>Number to Guess:
+                    <span id="number-to-guess"></span>
+                </h1>
+
+                <button id="firstGem" class="btn btn-primary btn-lg"></button>
+
+                <button id="secondGem" class="btn btn-primary btn-lg"></button>
+
+                <button id="thirdGem" class="btn btn-primary btn-lg"></button>
+
+                <button id="fourthGem" class="btn btn-primary btn-lg"></button>
+
+                <h1>Score:
+                    <span id="score"></span>
+                </h1>
+
+                <h1>Wins:
+                    <span id="wins"></span>
+                </h1>
+
+                <h1>Losses:
+                    <span id="losses"></span>
+                </h1>
+
+
+    </div>
+
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+
+            var firstGem;
+            var secondGem;
+            var thirdGem;
+            var fourthGem;
+            var targetNumber;
+            var playerTotal;
+            var wins = 0;
+            var losses = 0;
+
+            initialize();
+
+            function initialize() {
+
+                firstGem = Math.floor(Math.random() * 12) + 1;
+                secondGem = Math.floor(Math.random() * 12) + 1;
+                thirdGem = Math.floor(Math.random() * 12) + 1;
+                fourthGem = Math.floor(Math.random() * 12) + 1;
+                targetNumber = Math.floor(Math.random() * 101) + 19;
+                playerTotal = 0;
+
+                $("#number-to-guess").text(targetNumber);
+                $("#score").text(playerTotal);
+                $("#wins").text(wins);
+                $("#losses").text(losses);
+
+                function addClickHandler(buttonId, gemValue) {
+                    $(buttonId).on("click", function (e) {
+                        
+                        if (playerTotal > targetNumber) return;
+
+                        if (playerTotal <= targetNumber) {
+                            playerTotal += gemValue;
+                            $("#score").text(playerTotal);
+
+                        }
+                        if (playerTotal === targetNumber) {
+                            winner();
+                        }
+
+                        if (playerTotal > targetNumber) {
+                            loser();
+                        }
+
+                        function winner() {
+                            wins++;
+                            initialize();
+                        }
+
+                        function loser() {
+                            losses++;
+                            initialize();
+                        }
+                    });
+
+                }
+
+                addClickHandler('#firstGem', firstGem);
+                addClickHandler('#secondGem', secondGem);
+                addClickHandler('#thirdGem', thirdGem);
+                addClickHandler('#fourthGem', fourthGem);
+
+            }
+
+        });
+
+    </script>
+</body>
+
+</html>
