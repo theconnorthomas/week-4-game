@@ -1,0 +1,35 @@
+body {
+    background-image: url(../images/ancient-temple-minecraft-wallpaper.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    font-family: 'Caesar Dressing', cursive;
+    color: #33a784;
+}
+
+h1 {
+    text-align: center;
+    font-size: 10em;
+    }
+
+h2 {
+    font-size: 3em;
+}
+
+.jumbotron {
+    padding: 2em;
+    background: no-repeat;
+}
+
+img {
+    height: 12em;
+    width: 12em;
+}
+
+img:hover {
+    opacity: .75;
+}
+
+img:active {
+    opacity: 90;
+}

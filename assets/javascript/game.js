@@ -1,48 +1,82 @@
-/* $(document).ready(function () { */
+$(document).ready(function () {
 
-    var firstGem = Math.floor(Math.random() * 12) + 1;
-    var secondGem = Math.floor(Math.random() * 12) + 1;
-    var thirdGem = Math.floor(Math.random() * 12) + 1;
-    var forthGem = Math.floor(Math.random() * 12) + 1;
-    var targetNumber = Math.floor(Math.random() * 120) + 19;
+    //Declaraion of global variables.
+    var firstGem;
+    var secondGem;
+    var thirdGem;
+    var fourthGem;
+    var targetNumber;
     var playerTotal;
-    var
-    console.log(firstGem);
-    console.log(secondGem);
-    console.log(thirdGem);
-    console.log(forthGem);
-    console.log(targetNumber);
-    // Use a function to initialize our calculator.
-    // This way when the user hits clear, we can guarantee a reset of the app.
+    var wins = 0;
+    var losses = 0;
 
-   /*  function initialize() {
+
+    function initialize() {
+
+        //Sets random values for the gems and the targetNumber.
         firstGem = Math.floor(Math.random() * 12) + 1;
+        console.log(firstGem);
+
         secondGem = Math.floor(Math.random() * 12) + 1;
+        console.log(secondGem);
+
         thirdGem = Math.floor(Math.random() * 12) + 1;
-        forthGem = Math.floor(Math.random() * 12) + 1;
-        targetNumber = Math.floor(Math.random() * 120) + 19;
+        console.log(thirdGem);
 
+        fourthGem = Math.floor(Math.random() * 12) + 1;
+        console.log(fourthGem);
 
+        targetNumber = Math.floor(Math.random() * 101) + 19;
 
-        $("#playerTotal, #second-number, #operator, #result").empty();
+        playerTotal = 0;
+
+        $("#number-to-guess").text(targetNumber);
+        $("#score").text(playerTotal);
+        $("#wins").text(wins);
+        $("#losses").text(losses);
+
+        //Clears previous given to on click value when initialize is called to reset.
+        $('.gem').prop('onclick', null).off('click');
+
+        addClickHandler('#firstGem', firstGem);
+        addClickHandler('#secondGem', secondGem);
+        addClickHandler('#thirdGem', thirdGem);
+        addClickHandler('#fourthGem', fourthGem);
+
     }
 
-    initialize(); */
+    initialize();
 
-    /* // Add an on click listener to all elements that have the class "number"
-    $(".button").on("click", function () {
+    //On click function to add random value of the gems to the playerTotal.
+    function addClickHandler(buttonId, gemValue) {
+        $(buttonId).on("click", function (e) {
+            console.log(gemValue);
 
-        // Check if we've already run a calculation, if so... we'll just.
-        if (isCalculated) return;
+            if (playerTotal <= targetNumber) {
+                playerTotal += gemValue;
+                $("#score").text(playerTotal);
+            }
+            if (playerTotal === targetNumber) {
+                winner();
+            }
 
-        // If operator is chosen, we should be writing the secondNumber, otherwise, the firstNumber
-        if (isOperatorChosen) {
-            secondNumber += $(this).val();
-            $("#second-number").text(secondNumber);
+            if (playerTotal > targetNumber) {
+                loser();
+            }
 
-        }
-        else {
-            firstNumber += $(this).val();
-            $("#first-number").text(firstNumber);
-        } */
-/* }); */
+        });
+
+    }
+
+    //End game functions.
+    function winner() {
+        wins++;
+        initialize();
+    }
+
+    function loser() {
+        losses++;
+        initialize();
+    }
+
+});
